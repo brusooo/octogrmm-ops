@@ -1,12 +1,14 @@
 import { BigQuery } from "@google-cloud/bigquery";
-import path from "path";
 
-// Resolve key filename relative to process CWD, ignoring it for Turbopack bundle tracing
-const keyFilename = process.env.GOOGLE_APPLICATION_CREDENTIALS
-  ? path.resolve(/*turbopackIgnore: true*/ process.cwd(), process.env.GOOGLE_APPLICATION_CREDENTIALS)
+// Parse private key correctly (handling newlines if they are escaped)
+const privateKey = process.env.GCP_PRIVATE_KEY
+  ? process.env.GCP_PRIVATE_KEY.replace(/\\n/g, "\n")
   : undefined;
 
 export const bigquery = new BigQuery({
-  keyFilename,
-  projectId: "onelinkto",
+  projectId: process.env.GCP_PROJECT_ID,
+  credentials: {
+    client_email: process.env.GCP_CLIENT_EMAIL,
+    private_key: privateKey,
+  },
 });

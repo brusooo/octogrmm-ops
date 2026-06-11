@@ -173,7 +173,9 @@ Create a `.env` file in the root directory:
 
 ```env
 # Google Cloud Platform Credentials
-GOOGLE_APPLICATION_CREDENTIALS="service.json"
+GCP_PROJECT_ID="your-gcp-project-id"
+GCP_CLIENT_EMAIL="your-gcp-client-email"
+GCP_PRIVATE_KEY="your-gcp-private-key"
 
 # Fivetran API credentials
 FIVETRAN_API_KEY="your-api-key"
