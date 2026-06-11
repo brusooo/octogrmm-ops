@@ -22,7 +22,6 @@ Built for the **Rapid Agent Hackathon** integrating **Fivetran**, **BigQuery**, 
 - [Environment Variables](#-environment-variables)
 - [Webhook Security](#-webhook-security)
 - [Local Development](#-local-development)
-- [Roadmap](#-future-roadmap)
 - [Demo](#-demo)
 - [License](#-license)
 
@@ -242,6 +241,16 @@ Use the generated HTTPS tunnel URL to register your account-level or connector-l
 - [ ] **Supply Chain Risk Detection**: Factor in distributor shipping delays or manufacturing issues.
 - [ ] **Automated Procurement Workflows**: Trigger emergency courier runs based on real-time stocks.
 - [ ] **Executive Operations Reports**: Weekly summary digests compiled using Ollama with Gemma.
+
+---
+
+## 🎥 Demo
+
+Watch the Octogram project demonstration on YouTube:
+
+[![Octogram Demo Video](https://img.youtube.com/vi/0aiQZUp38r8/maxresdefault.jpg)](https://youtu.be/0aiQZUp38r8)
+
+Click the thumbnail or [here](https://youtu.be/0aiQZUp38r8) to watch the video.
 
 ---
 
