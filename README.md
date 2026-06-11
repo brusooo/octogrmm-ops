@@ -6,7 +6,7 @@
 
 Octogram is an intelligent operations monitoring platform that continuously synchronizes hospital ERP logs, predicts supply chain/stockout risks, manages critical schedules, generates alerts, and triggers Telegram notifications when critical operations are compromised.
 
-Built for the **Rapid Agent Hackathon** integrating **Fivetran**, **BigQuery**, **Ollama/Gemini**, and **Next.js**.
+Built for the **Rapid Agent Hackathon** integrating **Fivetran**, **BigQuery**, **Ollama with Gemma**, and **Next.js**.
 
 ---
 
@@ -160,7 +160,7 @@ By combining Fivetran data pipelines, BigQuery analytics, AI-powered reasoning, 
 
 - **Frontend/Backend**: Next.js (App Router), TypeScript, Tailwind CSS, shadcn/ui
 - **Data Warehousing**: Neon PostgreSQL, Fivetran, Google BigQuery
-- **AI Engine**: Ollama (Gemma / Gemini-compatible backend)
+- **AI Engine**: Ollama with Gemma
 - **Notifications**: Telegram Bot API
 
 ---
@@ -239,7 +239,7 @@ Use the generated HTTPS tunnel URL to register your account-level or connector-l
 - [ ] **BigQuery ML Forecasting**: Run ML models directly in BigQuery ML to predict seasonal medicine consumption peaks.
 - [ ] **Supply Chain Risk Detection**: Factor in distributor shipping delays or manufacturing issues.
 - [ ] **Automated Procurement Workflows**: Trigger emergency courier runs based on real-time stocks.
-- [ ] **Executive Operations Reports**: Weekly summary digests compiled using Gemini flash reports.
+- [ ] **Executive Operations Reports**: Weekly summary digests compiled using Ollama with Gemma.
 
 ---
 

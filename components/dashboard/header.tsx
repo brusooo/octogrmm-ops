@@ -8,12 +8,14 @@ interface HeaderProps {
   lastSyncTime: string;
   onOpenChat: () => void;
   onOpenDiagnostics: () => void;
+  isProduction?: boolean;
 }
 
 export function Header({
   lastSyncTime,
   onOpenChat,
-  onOpenDiagnostics
+  onOpenDiagnostics,
+  isProduction
 }: HeaderProps) {
   return (
     <header className="sticky top-0 z-40 bg-card/85 backdrop-blur-md border-b border-border">
@@ -47,21 +49,25 @@ export function Header({
           </div>
 
           <Button
-            onClick={onOpenDiagnostics}
+            onClick={isProduction ? undefined : onOpenDiagnostics}
+            disabled={isProduction}
             variant="outline"
-            className="border-border text-foreground hover:bg-muted font-medium text-xs px-4 py-2 rounded-lg flex items-center gap-2 cursor-pointer transition-all duration-200"
+            className="border-border text-foreground hover:bg-muted font-medium text-xs px-4 py-2 rounded-lg flex items-center gap-2 cursor-pointer transition-all duration-200 disabled:opacity-50"
+            title={isProduction ? "Disabled in production (Local only)" : undefined}
           >
             <ShieldCheck className="w-3.5 h-3.5 text-primary" />
-            Check Sync Health
+            {isProduction ? "Check Sync Health (Local Only)" : "Check Sync Health"}
           </Button>
 
           <Button
-            onClick={onOpenChat}
+            onClick={isProduction ? undefined : onOpenChat}
+            disabled={isProduction}
             variant="outline"
-            className="border-border text-foreground hover:bg-muted font-medium text-xs px-4 py-2 rounded-lg flex items-center gap-2 cursor-pointer transition-all duration-200"
+            className="border-border text-foreground hover:bg-muted font-medium text-xs px-4 py-2 rounded-lg flex items-center gap-2 cursor-pointer transition-all duration-200 disabled:opacity-50"
+            title={isProduction ? "Disabled in production (Local only)" : undefined}
           >
             <MessageSquare className="w-3.5 h-3.5 text-primary" />
-            Ask Octogram
+            {isProduction ? "Ask Octogram (Local Only)" : "Ask Octogram"}
           </Button>
         </div>
       </div>

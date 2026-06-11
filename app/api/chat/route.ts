@@ -5,6 +5,13 @@ import { askOllama } from "@/lib/ollama";
 export const dynamic = "force-dynamic";
 
 export async function POST(req: Request) {
+  if (process.env.NODE_ENV === "production") {
+    return NextResponse.json({
+      response: "Pipeline status and chat are disabled in production since Ollama is not connected. This feature is intended for local environment usage.",
+      message: "Pipeline status and chat are disabled in production since Ollama is not connected. This feature is intended for local environment usage."
+    });
+  }
+
   try {
     const { message } = await req.json();
     if (!message) {

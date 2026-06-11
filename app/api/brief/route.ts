@@ -84,6 +84,13 @@ function parseOllamaJson(text: string, fallback: any): any {
 }
 
 export async function GET() {
+  if (process.env.NODE_ENV === "production") {
+    return NextResponse.json({
+      summary: "AI operations brief is disabled in production. Ollama and Gemma are used in the local environment.",
+      recommended_actions: []
+    });
+  }
+
   try {
     // 1. Fetch active alerts from BigQuery
     const query = `

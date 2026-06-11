@@ -125,6 +125,8 @@ function mapRowToAlert(row: BigQueryAlertRow): Alert {
 }
 
 export default function Page() {
+  const isProduction = process.env.NODE_ENV === "production";
+
   // Alerts lists
   const [alerts, setAlerts] = useState<Alert[]>([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -144,6 +146,39 @@ export default function Page() {
   const [syncStatusStep, setSyncStatusStep] = useState<number>(0);
   const [isUpdatingStatus, setIsUpdatingStatus] = useState(false);
   const [actionFeedback, setActionFeedback] = useState<{message: string; type: "success" | "info"} | null>(null);
+
+  // Handlers for production environment checks
+  const handleOpenDiagnostics = () => {
+    if (isProduction) {
+      setActionFeedback({
+        message: "Pipeline diagnostics check is disabled in production. This feature is intended for local environment usage.",
+        type: "info"
+      });
+      return;
+    }
+    setIsHealthCheckOpen(true);
+  };
+
+  const handleOpenChat = () => {
+    if (isProduction) {
+      setActionFeedback({
+        message: "Ask Octogram Chat is disabled in production. This feature is intended for local environment usage.",
+        type: "info"
+      });
+      return;
+    }
+    setIsChatOpen(true);
+  };
+
+  // Show toast notification on mount if in production
+  useEffect(() => {
+    if (isProduction) {
+      setActionFeedback({
+        message: "Pipeline status and chat will be disabled since ollama can't be connected",
+        type: "info"
+      });
+    }
+  }, [isProduction]);
 
   // Fetch Fivetran connector status
   const fetchFivetranStatus = useCallback(async () => {
@@ -306,8 +341,9 @@ export default function Page() {
       <div className="min-h-screen bg-background text-foreground font-sans pb-16 flex flex-col justify-between">
         <Header
           lastSyncTime={lastSyncTime}
-          onOpenChat={() => {}}
-          onOpenDiagnostics={() => setIsHealthCheckOpen(true)}
+          onOpenChat={handleOpenChat}
+          onOpenDiagnostics={handleOpenDiagnostics}
+          isProduction={isProduction}
         />
         <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 flex-1 flex flex-col items-center justify-center min-h-[400px]">
           <div className="flex flex-col items-center gap-3">
@@ -325,8 +361,9 @@ export default function Page() {
       <div className="min-h-screen bg-background text-foreground font-sans pb-16 flex flex-col">
         <Header
           lastSyncTime={lastSyncTime}
-          onOpenChat={() => {}}
-          onOpenDiagnostics={() => setIsHealthCheckOpen(true)}
+          onOpenChat={handleOpenChat}
+          onOpenDiagnostics={handleOpenDiagnostics}
+          isProduction={isProduction}
         />
         <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 flex-1 flex flex-col items-center justify-center min-h-[400px] space-y-4">
           <div className="p-4 bg-destructive/15 text-destructive rounded-full">
@@ -377,8 +414,9 @@ export default function Page() {
       {/* Header */}
       <Header
         lastSyncTime={lastSyncTime}
-        onOpenChat={() => setIsChatOpen(true)}
-        onOpenDiagnostics={() => setIsHealthCheckOpen(true)}
+        onOpenChat={handleOpenChat}
+        onOpenDiagnostics={handleOpenDiagnostics}
+        isProduction={isProduction}
       />
 
       {/* Workspace */}
